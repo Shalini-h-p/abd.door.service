@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{shared/layout}">
+<body>
+<div layout:fragment="content"  xmlns:th="http://www.thymeleaf.org" th:switch="${histories}">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">History</h1>
+        <a th:href="@{/log}" class="btn btn-md btn-success ">Log</a>
+        <a th:href="@{/}" class="btn btn-sm btn-dark ">Back</a>
+          </div>
+    <h2 th:if="${histories == null or histories.isEmpty()}">No History Available</h2>
+    <div th:if="${histories != null and !histories.isEmpty()}">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col" colspan="1">Id</th>
+                <th scope="col" colspan="3">Name</th>
+                <th scope="col" colspan="2">Email</th>
+                <th scope="col" colspan="2">Type</th>
+                <th scope="col" colspan="2">Code Used</th>
+                <th scope="col" colspan="2">Created On</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="history : ${histories}" scope="row">
+                <td colspan="1" th:text="${history.getId()}"></td>
+                <td colspan="3" th:text="${history.getEmployee().getFullName()}"></td>
+                <td colspan="2" th:text="${history.getEmployee().getEmail()}"></td>
+                <td colspan="2" th:text="${history.getType()}"></td>
+                <td colspan="2" th:text="${history.getCodeUsed()}"></td>
+                <td colspan="2" th:text="${history.getCreatedOn()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
+

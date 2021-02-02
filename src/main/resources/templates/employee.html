@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{shared/layout}">
+<body>
+<div layout:fragment="content"  xmlns:th="http://www.thymeleaf.org" th:switch="${histories}">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Employee</h1>
+        <a th:href="@{/employee-add}" class="btn btn-md btn-primary ">Add</a>
+        <a th:href="@{/log}" class="btn btn-md btn-success ">Log</a>
+        <a th:href="@{/history}" class="btn btn-md btn-success ">History</a>
+        <a th:href="@{/}" class="btn btn-sm btn-dark ">Back</a>
+    </div>
+    <h2 th:if="${employees == null or employees.isEmpty()}">No Employee Available.</h2>
+    <div th:if="${employees != null and !employees.isEmpty()}">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col" colspan="1">Id</th>
+                <th scope="col" colspan="2">Name</th>
+                <th scope="col" colspan="1">Code</th>
+                <th scope="col" colspan="2">Email</th>
+                <th scope="col" colspan="2">LastModified On</th>
+                <th scope="col" colspan="2">Created On</th>
+                <th scope="col" colspan="2">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="employee : ${employees}" scope="row">
+                <td colspan="1" th:text="${employee.getId()}"></td>
+                <td colspan="2" th:text="${employee.getFullName()}"></td>
+                <td colspan="1" th:text="${employee.getCode()}"></td>
+                <td colspan="2" th:text="${employee.getEmail()}"></td>
+                <td colspan="2" th:text="${employee.getLastModifiedOn()}"></td>
+                <td colspan="2" th:text="${employee.getCreatedOn()}"></td>
+                <td colspan="2">
+                    <a th:href="@{/employee-update/{id}(id=${employee.getId()})}" class="btn btn-sm btn-success">Edit</a>
+                    <a th:href="@{/employee-delete/{id}(id=${employee.getId()})}" class="btn btn-sm btn-danger ml-2">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
+

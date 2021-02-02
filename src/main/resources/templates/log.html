@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{shared/layout.html}">
+<body>
+<div layout:fragment="content">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Log</h1>
+        <a th:href="@{/}" class="btn btn-sm btn-dark ">Back</a>
+          </div>
+   <div class="row ">
+       <div class="col-3"></div>
+      <div class="col-6">
+          <form th:action="@{/log}" th:object="${logDto}" method="post">
+              <div class="form-group mb-3">
+                  <input type="number" th:field="*{code}" class="form-control" id="code" placeholder="code">
+              </div>
+              <div class="form-check mb-3">
+                  <input class="form-check-input" type="radio" name="enter" id="enter" value="ENTER" th:field="*{type}" checked>
+                  <label class="form-check-label" for="enter">
+                      Enter
+                  </label>
+              </div>
+              <div class="form-check mb-3">
+                  <input class="form-check-input" type="radio" name="exit" id="exit" value="EXIT" th:field="*{type}">
+                  <label class="form-check-label" for="exit">
+                      Exit
+                  </label>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+      </div>
+       <div class="col-3"></div>
+   </div>
+</div>
+</body>
+</html>
